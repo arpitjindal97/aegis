@@ -1,6 +1,6 @@
-FROM ubuntu:latest
+FROM alpine:latest
 
-RUN apt-get update && apt-get install iptables iproute2 wireguard -y
+RUN apk update && apk add iptables iproute2 wireguard-tools wireguard-virt
 
 COPY server.conf /etc/wireguard/wg0.conf
 COPY run.sh /run.sh
