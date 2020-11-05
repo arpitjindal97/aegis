@@ -1,4 +1,6 @@
-# Wireguard inside Docker
+# VPN Server inside Docker
+
+Includes Wireguard and Strongswan
 
 Below are the commands to spawn a container
 
@@ -19,9 +21,9 @@ Enable NAT for docker0
 ip6tables -t nat -A POSTROUTING -s 2001:0db8:0001::/64 ! -o docker0 -j MASQUERADE
 ```
 
-docker run -d --cap-add net_admin --cap-add sys_module -p 51820:51820/udp --sysctl net.ipv6.conf.all.disable_ipv6=0 --sysctl net.ipv6.conf.all.forwarding=1 --restart unless-stopped arpitjindal1997/myst-multiarch:wireguard
+docker run -d --cap-add net_admin --cap-add sys_module -p 51820:51820/udp -p 500:500/udp -p 4500:4500/udp --sysctl net.ipv6.conf.all.disable_ipv6=0 --sysctl net.ipv6.conf.all.forwarding=1 --restart unless-stopped arpitjindal1997/myst-multiarch:wireguard
 
-OpenVPN will fail 
+OpenVPN client will fail inside containers
 
 ## Using new network Interface
 
