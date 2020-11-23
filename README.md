@@ -4,32 +4,38 @@ Includes Wireguard and Strongswan
 
 Below are the commands to spawn a container
 
+This is needed because in some VPS `ip6table` mod is not loaded by default
 ```
 modprobe ip6table_filter
 modprobe ip6table_nat
 ```
 
-## Using docker0 bridge interface
-
-Configure IPv6 in docker from below link
-
-https://docs.docker.com/config/daemon/ipv6/
-
-Enable NAT for docker0
-
-```
-ip6tables -t nat -A POSTROUTING -s 2001:0db8:0001::/64 ! -o docker0 -j MASQUERADE
-```
-
-docker run -d --cap-add net_admin --cap-add sys_module -p 51820:51820/udp -p 500:500/udp -p 4500:4500/udp --sysctl net.ipv6.conf.all.disable_ipv6=0 --sysctl net.ipv6.conf.all.forwarding=1 --restart unless-stopped arpitjindal1997/myst-multiarch:wireguard
-
-OpenVPN client will fail inside containers
-
-## Using new network Interface
-
+Run Container using below command
 ```
 ip6tables -t nat -A POSTROUTING -s 2001:3200:3200::/64 ! -o docker0 -j MASQUERADE
 
 docker-compose up -d --force-recreate
 
 ```
+
+## Client Configuration
+
+There are 2 VPNs running, so you have flexibility to use of them
+
+### strongSwan
+
+For Desktop, There is inbuilt support for this, so no need to install any app from outside
+
+ - Get LetsEncrypt Auth cert from [here](https://letsencrypt.org/certs/letsencryptauthorityx3.pem)
+
+ - Import it into strongSwan app
+
+ - Fill in proper details in profile, and tick on select cert automatically
+
+ - Click Connect
+
+ ### Wireguard
+
+ - Import the client config
+
+ - Click Connect
