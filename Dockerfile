@@ -7,16 +7,18 @@ RUN apk add iptables ip6tables iproute2
 RUN apk add wireguard-tools wireguard-virt
 
 RUN apk add strongswan
+RUN rm /etc/ipsec.conf /etc/ipsec.secrets
 
-COPY wg0.conf /etc/wireguard/wg0.conf
+## Uncomment them, if you want to create your personalized image
+#COPY config/wg/wg0.conf /etc/wireguard/wg0.conf
+#COPY config/ipsec/fullchain.pem /etc/ipsec.d/certs/
+#COPY config/ipsec/privkey.pem /etc/ipsec.d/private/
+#COPY config/ipsec/ipsec.conf /etc/ipsec.conf
+#COPY config/ipsec/ipsec.secrets /etc/ipsec.secrets
 
-COPY ipsec.d/fullchain.pem /etc/ipsec.d/certs/
-COPY ipsec.d/privkey.pem /etc/ipsec.d/private/
-COPY ipsec.conf /etc/ipsec.conf
-COPY ipsec.secrets /etc/ipsec.secrets
+WORKDIR /root
+COPY run.sh /root/run.sh
+RUN chmod +x /root/run.sh
 
-COPY run.sh /run.sh
-RUN chmod +x /run.sh
-
-CMD ["/run.sh"]
+CMD ["/root/run.sh"]
 

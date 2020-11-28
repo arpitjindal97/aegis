@@ -1,7 +1,7 @@
 version: '2.1'
 services:
   vpnserver:
-    image: arpitjindal1997/myst-multiarch:vpnserver
+    image: arpitjindal1997/vpnserver:latest
     cap_add:
      - NET_ADMIN
      - SYS_MODULE
@@ -15,6 +15,8 @@ services:
      - 51820:51820/udp
      - 500:500/udp
      - 4500:4500/udp
+    volumes:
+     - ./config:/root/config:ro
     networks:
       app_net:
         ipv6_address: 2001:3200:3200::20
