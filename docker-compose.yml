@@ -1,7 +1,7 @@
 version: '2.1'
 services:
-  vpnserver:
-    image: arpitjindal1997/vpnserver:latest
+  aegis:
+    image: arpitjindal1997/aegis:latest
     cap_add:
      - NET_ADMIN
      - SYS_MODULE
