@@ -14,6 +14,7 @@ Aegis VPN is a docker image to deploy your own Personal VPN Server. You must hav
  - Get certificate from [Let's Encrypt](https://letsencrypt.org/) using [Certbot](https://certbot.eff.org/)
  - Generate wireguard config with peer config
  - Get ready with `ipsec.secrets` and `ipsec.conf`
+ - Docker daemon with IPv6 enabled. See [this](https://docs.docker.com/config/daemon/ipv6/)
 
 This repo also contains sample configs but make sure to make changes according to your needs.
 
@@ -59,7 +60,7 @@ Create any directory inside the machine and keep `config.zip` inside it.
 You can clone this repo as well
 
 ```
-git clone https://github.com/arpitjindal97/vpnserver
+git clone https://github.com/arpitjindal97/aegis
 cd vpnserver
 # place config.zip here
 rm -r config
@@ -91,7 +92,7 @@ For Mobile:
 
  - Download application from [here](https://www.wireguard.com/install/)
 
- - Get LetsEncrypt Auth cert from [here](https://letsencrypt.org/certs/letsencryptauthorityx3.pem)
+ - Get LetsEncrypt Auth cert from [here](https://letsencrypt.org/certs)
 
  - Import it into strongSwan app
 
